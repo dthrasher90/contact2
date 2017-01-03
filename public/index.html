@@ -1,0 +1,51 @@
+
+<!DOCTYPE html>
+<html ng-app= "contactList">
+<head>
+  <meta charset="utf-8">
+  <title>My Mean Stack application</title>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
+  <link rel="stylesheet" type:"text/css" href="main.css">
+  <script src="public/app.js">  </script>
+</head>
+
+<header class="jumbotron text-center">
+<h2>Mean Stack ContactList App </h2>
+<h4>Feel free to use</h4>
+</header>
+
+<body ng-controller= "mainController">
+<div class="table-hover">
+
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th> First Name </th>
+        <th> Last Name </th>
+        <th> Email </th>
+        <th> Phone </th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <tr ng-repeat= "contact in contacts">
+        <td> {{contact.firstname}} </td>
+        <td> {{contact.lastname}} </td>
+        <td> {{contact.email}} </td>
+        <td> {{contact.phone}} </td>
+        <td>  {{contact._id}} </td>
+        <td> <button class= "btn btn-danger" ng-click= "remove(contact._id)"> Delete</td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>
+
+
+</body>
