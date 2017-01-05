@@ -22,6 +22,13 @@
 
 <body>
   <div class="container" ng-controller= "MainCtrl">
+
+    <div class="btn-group">
+     <button type="button" ng-click="createContact()" name="Create" class="btn btn-primary">Create</button>
+     <button type="button" ng-click="editContact(contactid)" name="Edit" class="btn btn-primary">Edit</button>
+     <button type="button" ng-click="deleteContact(contactid)" name="Delete" class="btn btn-primary">Delete</button>
+   </div>
+
   <table class="table table-striped">
     <thead>
       <tr>
@@ -32,10 +39,10 @@
       </tr>
     </thead>
     <tbody>
-      <button type="button" ng-click="deletecontact(contactid)" name="Delete">delete</button>
+
       <tr ng-repeat= "contact in contacts">
         {{contact}}
-        <td> <input ng-model="contactid" ng-value={{contact._id}} name="test" type="radio" id={{contact._id}} /></td>
+        <td> <input ng-model="contactid" ng-click="setContact(contact._id)"ng-value=contact._id name="test" type="radio" id={{contact._id}} /></td>
         <td> {{contact.firstname}} </td>
         <td> {{contact.lastname}} </td>
         <td> {{contact.email}} </td>
