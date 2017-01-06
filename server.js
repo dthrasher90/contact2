@@ -6,6 +6,7 @@ var mongojs = require('mongojs');
 var MongoClient = require('mongodb').MongoClient;
 var db = mongojs('contactlist',['contactlist']);
 var ObjectId = require('mongodb').ObjectId;
+var path= require('path');
 
 app.use(express.static(__dirname + "/public"));
 
@@ -21,11 +22,9 @@ app.get('/contactlist', function(req, res){
   db.contactlist.find(function(err, docs){
     console.log(docs);
     res.json(docs);
-    //find out how to remove via mongojs for line 36
-    //http://mongoosejs.com/docs/index.html
-
   })
 });
+
 
 app.get('/', function(req, res){
   console.log("get /");
@@ -37,15 +36,15 @@ app.delete('/contactlist/:id', function(req, res){
   var id = req.params.id;
   console.log("i recieved a delete request", id);
   //console.log (id);
-  db.contactlist.remove({_id:ObjectId(id)});
-console.log('ObjectId', ObjectId(id))    });
+  db.contactlist.remove({ "_id" : ObjectId(id) }, function(err, data){
+      res.json(data);
+  });
 
+ });
 
-
-  //  res.json({message: "hi there, got your requst",
-  //            object:  id});
-// });
-
+ app.get('*', function(req, res) {
+      res.sendfile('./public/index.html'); // load the single view file (angular will handle the page changes on the front-end)
+  });
 
 
 
