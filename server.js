@@ -1,52 +1,53 @@
 var express = require('express');
-var app = express();
-var mongoose = require('mongoose');
+var http = require('http');
+var path = require('path');
 var bodyParser = require('body-parser');
+var mongodb = require('mongodb');
+var ObjectID = mongodb.ObjectID;
 var mongojs = require('mongojs');
-var MongoClient = require('mongodb').MongoClient;
 var db = mongojs('contactlist',['contactlist']);
-var ObjectId = require('mongodb').ObjectId;
-var path= require('path');
 
-app.use(express.static(__dirname + "/public"));
+var app = express();
 
-var url = 'mongodb://localhost:27017/';
-MongoClient.connect(url, function(err, db) {
-  console.log("Connected correctly to server");
-
-});
-
+app.use(express.static(__dirname + '/public'));
 app.get('/contactlist', function(req, res){
   console.log("i received a get request");
 
-  db.contactlist.find(function(err, docs){
-    console.log(docs);
-    res.json(docs);
-  })
+db.contactlist.find(function(err, docs){
+  console.log(docs);
+  res.json(docs);
+
+})
+
+
+});
+
+app.use(bodyParser.json());
+
+
+var MongoClient = mongodb.MongoClient;
+
+var url = 'mongodb://localhost:27017/contactlist';
+
+
+
+MongoClient.connect(url, function(err, db){
+  if (err) {
+    console.log('unable to connect to the mongodb server.  Error:', err);
+  } else {
+    console.log('Hurray, we have succesffuly connected to the mongdb server');
+
+  };
+
 });
 
 
-app.get('/', function(req, res){
-  console.log("get /");
-  res.sendFile('index.html');
-});
+ db.collection('contactlist').find().toArray(function (err, result){
+    if (err) throw err
 
+    console.log(result);
 
-app.delete('/contactlist/:id', function(req, res){
-  var id = req.params.id;
-  console.log("i recieved a delete request", id);
-  //console.log (id);
-  db.contactlist.remove({ "_id" : ObjectId(id) }, function(err, data){
-      res.json(data);
-  });
-
- });
-
- app.get('*', function(req, res) {
-      res.sendfile('./public/index.html'); // load the single view file (angular will handle the page changes on the front-end)
-  });
-
-
+})
 
 app.listen(3000);
-console.log('Now listening at port 3000');
+console.log("server running on port 3000");

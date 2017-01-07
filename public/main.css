@@ -1,11 +1,9 @@
-header{
-  font-family: sans-serif;
-  text-align: center;
+.body{
+  background: black;
 
 }
 
+.h1{
 
-body{
-  font-family: sans-serif;
-
+  text-align: center;
 }
