@@ -1,20 +1,21 @@
-w{
-  "name": "drew",
+{
+  "name": "contact2",
   "version": "1.0.0",
-  "description": "mean stack contact list app",
-  "main": "server.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
-  },
-  "author": "",
-  "license": "ISC",
+  "description": "",
+  "main": "index.js",
   "dependencies": {
     "body-parser": "^1.15.2",
     "express": "^4.14.0",
-    "mongodb": "^2.2.12",
+    "method-override": "^2.3.7",
     "mongojs": "^2.4.0",
-    "mongoose": "^4.7.1",
-    "nodemon": "^1.11.0"
-  }
+    "mongoose": "^4.7.5",
+    "morgan": "^1.7.0",
+    "path": "^0.12.7"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
 }

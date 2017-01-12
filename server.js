@@ -1,53 +1,86 @@
 var express = require('express');
-var http = require('http');
-var path = require('path');
-var bodyParser = require('body-parser');
-var mongodb = require('mongodb');
-var ObjectID = mongodb.ObjectID;
-var mongojs = require('mongojs');
-var db = mongojs('contactlist',['contactlist']);
-
 var app = express();
-
-app.use(express.static(__dirname + '/public'));
-app.get('/contactlist', function(req, res){
-  console.log("i received a get request");
-
-db.contactlist.find(function(err, docs){
-  console.log(docs);
-  res.json(docs);
-
-})
+var mongoose = require('mongoose');
+var bodyParser = require('body-parser');
+var mongojs = require('mongojs');
+var MongoClient = require('mongodb').MongoClient;
+var db = mongojs('contactlist',['contactlist']);
+var ObjectId = require('mongodb').ObjectId;
+var path=require('path');
 
 
-});
-
+app.use(express.static(__dirname + "/public"));
 app.use(bodyParser.json());
 
-
-var MongoClient = mongodb.MongoClient;
-
-var url = 'mongodb://localhost:27017/contactlist';
-
-
-
+var url = 'mongodb://localhost:27017/';
 MongoClient.connect(url, function(err, db){
-  if (err) {
-    console.log('unable to connect to the mongodb server.  Error:', err);
-  } else {
-    console.log('Hurray, we have succesffuly connected to the mongdb server');
+    console.log("Connected correctly to server");
 
-  };
+  });
 
-});
+app.get('/contactlist', function(req, res){
+    console.log("i received a get request");
+
+    db.contactlist.find(function(err, data){
+      console.log(data);
+      res.json(data);
+      });
+    });
 
 
- db.collection('contactlist').find().toArray(function (err, result){
-    if (err) throw err
+// app.get('/', function(req, res){
+//   res.sendFile(__dirname +'./public/index.html');
+//   });
+//
+// app.get('*', function(req, res) {
+//   res.sendFile(__dirname +'./public/index.html');
+//    });
 
-    console.log(result);
 
-})
+
+ app.post('/contactlist/', function(req, res){
+    console.log(req.body);
+     db.contactlist.insert(req.body, function(err, data){
+     res.json(data);
+      });
+     });
+
+
+app.delete('/contactlist/:id', function(req, res){
+      var id = req.params.id;
+      console.log("i recieved a delete request", id);
+      db.contactlist.remove( { _id: mongojs.ObjectId(id) }, function(err, data){
+      res.json(data);
+    });
+  });
+
+
+app.get('/contactlist/:id', function(req, res){
+     var id = req.params.id;
+     console.log(id);
+     db.contactlist.findOne({_id: mongojs.ObjectId(id)}, function(err, data){
+     res.json(data);
+     console.log(data);
+          });
+      });
+
+      app.put('/contactlist/:id', function (req, res) {
+        var id = req.params.id;
+        console.log(req.body.name);
+        db.contactlist.findAndModify({
+          query: {_id: mongojs.ObjectId(id)},
+          update: {$set: {firstname: req.body.firstname, lastname: req.body.lastname, email: req.body.email, phone: req.body.phone}},
+          new: true}, function (err, doc) {
+            res.json(doc);
+          }
+        );
+      });
+
+
+
+
+
+
 
 app.listen(3000);
-console.log("server running on port 3000");
+console.log('Now listening at port 3000');
