@@ -30,11 +30,6 @@ app.controller("MainCtrl", function($scope, $http){
 
 
 
-    $scope.contacts = [];
-      $http.get('/contactlist').then(function(response){
-          console.log(" i got the data requested.");
-          $scope.contacts = response.data;
-          });
 
 
       $scope.delete = function(id){

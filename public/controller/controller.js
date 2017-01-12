@@ -28,8 +28,11 @@ var app = angular.module("contactlistApp", ['ngRoute']);
 
 app.controller("MainCtrl", function($scope, $http){
 
+  function refresh() {
+      location.reload();
+      }
 
-    $scope.contacts = [];
+   $scope.contacts = [];
       $http.get('/contactlist').then(function(response){
           console.log(" i got the data requested.");
           $scope.contacts = response.data;
@@ -43,38 +46,36 @@ app.controller("MainCtrl", function($scope, $http){
              method: 'DELETE',
              url: '/contactlist/' + id
            }).then(function(){
-            
-
+             refresh();
            });
          };
 
-//SCOPE TO REMOVE FROM ARRAY IN DELETE function REMOVE DATA AND DELTE, AND PUSH NEW DATA UP AND CLEAR TEXT BOX
 
 
       $scope.addContact = function(){
             alert("add contact button");
             $http.post('/contactlist', $scope.contact).then(function(data){
+              alert("add callback");
               console.log(data);
-            })
+              refresh();
+            });
          };
 
 
-       $scope.edit =
-       function(id){
+       $scope.edit = function(id){
          console.log("from edit ", id);
             $http.get('/contactlist/' + id)
             .then(function callback(response){
-              alert("callback function");
-              $scope.contact = response.data;
-              console.log($scope.contact);
-            });
+             alert("callback function");
+                $scope.contact = response.data;
+                console.log(response.data);
+             });
           };
 
-      // $scope.saveContact = function(){
-      //   console.log($scope.contact._id);
-      //     $http.put('/contactlist/' + $scope.contact._id, $scope.contact)
-      //
-      //
-      // }
+      $scope.saveContact = function(id){
+        console.log(id);
+          $http.put('/contactlist/' + $scope.contact._id, $scope.contact);
+          refresh();
+        };
 
   });
