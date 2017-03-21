@@ -12,7 +12,7 @@ var path=require('path');
 app.use(express.static(__dirname + "/public"));
 app.use(bodyParser.json());
 
-var url = 'mongodb://localhost:27017/';
+var url = 'process.env.MONGODB_URI';
 MongoClient.connect(url, function(err, db){
     console.log("Connected correctly to server");
 
@@ -82,5 +82,5 @@ app.get('/contactlist/:id', function(req, res){
 
 
 
-app.listen(3000);
-console.log('Now listening at port 3000');
+app.listen(5000);
+console.log('Now listening at port 5000');
