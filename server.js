@@ -12,7 +12,7 @@ var path=require('path');
 app.use(express.static(__dirname + "/public"));
 app.use(bodyParser.json());
 
-var url = process.env.MONGODB_URI || 'mongodb://localhost/todoapi';
+var url = process.env.MONGODB_URI || 'mongodb://localhost/contact2';
 MongoClient.connect(url, function(err, db){
     console.log("Connected correctly to server");
 
