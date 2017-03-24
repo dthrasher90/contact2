@@ -4,7 +4,7 @@ var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var mongojs = require('mongojs');
 var MongoClient = require('mongodb').MongoClient;
-var db = mongojs('contactlist',['contactlist']);
+var db = mongojs('url',['url']);
 var ObjectId = require('mongodb').ObjectId;
 var path=require('path');
 var config = require('./config');
@@ -20,7 +20,7 @@ MongoClient.connect(url, function(err, db){
 
   });
 
-app.get('/contactlist', function(req, res){
+app.get('/url', function(req, res){
     console.log("i received a get request");
 
     db.contactlist.find(function(err, data){
