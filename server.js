@@ -48,7 +48,7 @@ app.get('/url', function(req, res){
      });
 
 
-app.delete('/contactlist/:id', function(req, res){
+app.delete('/url/:id', function(req, res){
       var id = req.params.id;
       console.log("i recieved a delete request", id);
       db.contactlist.remove( { _id: mongojs.ObjectId(id) }, function(err, data){
@@ -57,7 +57,7 @@ app.delete('/contactlist/:id', function(req, res){
   });
 
 
-app.get('/contactlist/:id', function(req, res){
+app.get('/url/:id', function(req, res){
      var id = req.params.id;
      console.log(id);
      db.contactlist.findOne({_id: mongojs.ObjectId(id)}, function(err, data){
@@ -66,7 +66,7 @@ app.get('/contactlist/:id', function(req, res){
           });
       });
 
-      app.put('/contactlist/:id', function (req, res) {
+      app.put('/url/:id', function (req, res) {
         var id = req.params.id;
         console.log(req.body.name);
         db.contactlist.findAndModify({
