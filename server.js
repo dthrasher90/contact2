@@ -7,13 +7,14 @@ var MongoClient = require('mongodb').MongoClient;
 var db = mongojs('contactlist',['contactlist']);
 var ObjectId = require('mongodb').ObjectId;
 var path=require('path');
+var config = require('./config');
 
 
 app.use(express.static(__dirname + "/public"));
 app.use(bodyParser.json());
 
-var url = process.env.MONGODB_URI || 'mongodb://localhost/contact2';
-MongoClient.connect(url, function(err, db){
+// var url = process.env.MONGODB_URI || 'mongodb://localhost/contact2';
+MongoClient.connect(config.db, function(err, db){
     console.log("Connected correctly to server");
 
   });
@@ -82,5 +83,5 @@ app.get('/contactlist/:id', function(req, res){
 
 
 
-app.listen(process.env.PORT || 2000);
-console.log('Now listening at port 5000');
+app.listen(config.port);
+console.log('Now listening at port '+config.port);
