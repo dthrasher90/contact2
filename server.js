@@ -13,14 +13,14 @@ var config = require('./config');
 app.use(express.static(__dirname + "/public"));
 app.use(bodyParser.json());
 
- var url = 'process.env.MONGOLAB_URI' ;
+ var url = 'process.env.MONGODB_URI' ;
 console.log("**************************", url)
 MongoClient.connect(url, function(err, db){
     console.log("Connected correctly to server");
 
   });
 
-app.get('/https://api.mlab.com/api/1/databases/contactlist/collections?apiKey=ZH33Xy3jzoxzy8529zjmP1wnN0FO5HZ8', function(req, res){
+app.get('/url', function(req, res){
     console.log("i received a get request");
 
     db.contactlist.find(function(err, data){
