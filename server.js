@@ -13,8 +13,9 @@ var config = require('./config');
 app.use(express.static(__dirname + "/public"));
 app.use(bodyParser.json());
 
-// var url = process.env.MONGODB_URI || 'mongodb://localhost/contact2';
-MongoClient.connect(config.db, function(err, db){
+ var url = process.env.MONGODB_URI || 'mongodb://localhost/contact2';
+console.log("**************************", url)
+MongoClient.connect(url, function(err, db){
     console.log("Connected correctly to server");
 
   });
