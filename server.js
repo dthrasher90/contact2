@@ -40,7 +40,7 @@ app.get('/url', function(req, res){
 
 
 
- app.post('/contactlist/', function(req, res){
+ app.post('/url/', function(req, res){
     console.log(req.body);
      db.contactlist.insert(req.body, function(err, data){
      res.json(data);
