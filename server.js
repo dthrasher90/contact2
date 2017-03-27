@@ -13,7 +13,7 @@ var config = require('./config');
 app.use(express.static(__dirname + "/public"));
 app.use(bodyParser.json());
 
- var url = 'process.env.MONGODB_URI' ;
+ var url = process.env.MONGODB_URI ;
 console.log("**************************", url);
 MongoClient.connect(url, function(err, db){
     console.log("Connected correctly to server");
