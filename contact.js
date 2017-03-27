@@ -7,6 +7,7 @@ var ContactSchema = new Schema({
 	lastname: String,
 	email: String,
   phone: Number,
+	social: String
 });
 
 
