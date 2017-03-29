@@ -72,5 +72,22 @@ app.delete('/contactlist/:id', function(req, res){
 
 });
 
+
+app.put('/contactlist/:id', function(req, res){
+  var id = req.params.id;
+   console.log("from put request");
+
+   Contact.findById(id, function(err, data){
+      if (err) {console.log("error in find");
+    }
+
+    //  Contact.save(function(err, updateData){
+    //   if (err) {console.log("error in save");
+    // };
+    //     res.json(updateData);
+    //   });
+    });
+});
+
 app.listen(config.port);
 console.log('Now listening at port' + config.port);

@@ -22,14 +22,16 @@
 </header>
 
 <body ng-app="contactlistApp" ng-controller="MainCtrl">
-    <button class="btn btn-warning addbtn" onclick="openNav()">ADD </button>
+
+
+    <button class="btn btn-warning addbtn" onclick="openAddNav()">Create New Contact </button>
+    <p>Search:  <input type="test" ng-model="searchContact"></p>
+
+
 <div id="main">
-
-
     <div class="container-fluid">
         <div class="row">
             <div class="col.xs.10">
-
                 <table class="table table-hover">
                     <thead>
                         <tr>
@@ -40,18 +42,19 @@
                             <th> Social Media</th>
                         </tr>
                     </thead>
+                </div>
             </div>
-        </div>
 
 
 
 
         <div class="row">
             <div class="col-xs-2">
-                <tbody>
-                    <p>Search:  <input type="test" ng-model="searchContact"></p>
 
-                    <tr ng-repeat="contact in contacts | filter : searchContact">
+                <tbody>
+
+
+                    <tr ng-repeat="contact in contacts | filter:searchContact" >
 
 
                         <td> {{contact.firstname}} </td>
@@ -60,16 +63,15 @@
                         <td> {{contact.phone}} </td>
                         <td> {{contact.socialmedia}} </td>
 
-                        <div ng-show="inputBoxes">
 
-                        </div>
                           <td>
-                            <button type="button" class="btn btn-default btn-sm editbtn" ng-click="edit(contact._id)">
+                            <button type="button" class="btn btn-default btn-sm editbtn" onClick= "openEditNav(contact)">
                             <span class="glyphicon glyphicon-pencil"></span>
                             </button> </td>
-                              <td><button type="button" class="btn btn-default btn-sm delete" ng-click="delete(contact._id)">
-                              <span class="glyphicon glyphicon-trash"></span>
-                          </button> </td>
+
+                        <td><button type="button" class="btn btn-default btn-sm delete" ng-click="delete(contact._id)">
+                            <span class="glyphicon glyphicon-trash"></span>
+                            </button> </td>
 
 
                         </tr>
@@ -77,37 +79,74 @@
 
                     </tbody>
                 </table>
+  <!--====================================== NAV BARS=========================================================== -->
 
-                    <!--========================== side nav ============================= -->
+                <div id="editNav" class="sidenav" >
+                    <h6>Edit Contact</h6>
+                    <a href="javascript:void(0)" class="closebtn" onclick="closeEditNav()">&times;</a>
+                    <input class="form-control" ng-model="contactEdit.firstname" placeholder="first name">
+                    <input class="form-control" ng-model="contactEdit.lastname" placeholder="last name">
+                    <input class="form-control" ng-model="contactEdit.email" placeholder="email">
+                    <input class="form-control" ng-model="contactEdit.phone" placeholder="phone number">
 
-                <div id="mySidenav" class="sidenav">
-                    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-                    <input class="form-control" ng-model="contact.firstname" placeholder="first name">
-                    <input class="form-control" ng-model="contact.lastname" placeholder="last name">
-                    <input class="form-control" ng-model="contact.email" placeholder="email">
-                    <input class="form-control" ng-model="contact.phone" placeholder="phone number">
-                    
 
-                    <button type="button" ng-click="addContact(contact._id)" class="btn btn-warning">Add</button>
+                    <button type="button" ng-click="addContact(contactEdit)" class="btn btn-warning">Save</button>
 
                 </div>
+
+                <div id="addNav" class="sidenav">
+                    <h6>New Contact Form: </h6>
+                    <a href="javascript:void(0)" class="closebtn" onclick="closeAddNav()">&times;</a>
+                    <input class="form-control" ng-model="contactAdd.firstname" placeholder="first name">
+                    <input class="form-control" ng-model="contactAdd.lastname" placeholder="last name">
+                    <input class="form-control" ng-model="contactAdd.email" placeholder="email">
+                    <input class="form-control" ng-model="contactAdd.phone" placeholder="phone number">
+
+
+                    <button type="button" ng-click="addContact(contactAdd)" class="btn btn-warning">Save</button>
+
+                </div>
+
             </div>
         </div>
     </div>
 </div>
 </body>
 
+
+<!-- ==================================================Java Script================================================ -->
+
+
+
+
+
+
+
 <script type="text/javascript">
+
+
     /* Set the width of the side navigation to 250px */
-    function openNav() {
-        document.getElementById("mySidenav").style.width = "250px";
-        document.getElementById("main").style.marginLeft = "250px";
+    function openAddNav() {
+        document.getElementById("addNav").style.width = "200px";
+        document.getElementById("main").style.marginLeft = "200px";
 
     }
 
     /* Set the width of the side navigation to 0 */
-    function closeNav() {
-        document.getElementById("mySidenav").style.width = "0";
+    function closeAddNav() {
+        document.getElementById("addNav").style.width = "0";
+        document.getElementById("main").style.marginLeft = "0";
+    }
+
+    function openEditNav() {
+        document.getElementById("editNav").style.width = "200px";
+        document.getElementById("main").style.marginLeft = "200px";
+
+    }
+
+    /* Set the width of the side navigation to 0 */
+    function closeEditNav() {
+        document.getElementById("editNav").style.width = "0";
         document.getElementById("main").style.marginLeft = "0";
     }
 </script>
