@@ -73,21 +73,29 @@ app.delete('/contactlist/:id', function(req, res){
 });
 
 
-app.put('/contactlist/:id', function(req, res){
-  var id = req.params.id;
-   console.log("from put request");
 
-   Contact.findById(id, function(err, data){
-      if (err) {console.log("error in find");
+app.put('/contactlist/', function(req, res){
+    // var id = req.params.id;
+   console.log("from put request "  + id);
+
+   Contact.findByIdAndUpdate(id, req.body, function(err, contact){
+
+     console.log("find by id= "+ contact);
+      if (err)  {
+
+        res.send(500);
+
+    } else {
+
+      Contact.save(function (err){
+        if (err) { console.log("dosument save error")}
+        else {res.json(contact)}
+      })
+      // res.json(contact);
     }
-
-    //  Contact.save(function(err, updateData){
-    //   if (err) {console.log("error in save");
-    // };
-    //     res.json(updateData);
-    //   });
-    });
 });
+});
+
 
 app.listen(config.port);
 console.log('Now listening at port' + config.port);

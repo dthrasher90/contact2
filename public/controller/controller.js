@@ -31,7 +31,11 @@ app.controller("MainCtrl", function($scope, $http){
   function refresh() {
       location.reload();
       }
+
+
 $scope.contacts = [];
+
+
 $http.get('/contactlist').then(function(response) {
     console.log(" i got the data requested.");
     $scope.contacts = response.data;
@@ -64,49 +68,43 @@ $scope.addContact = function(contact) {
 
 $scope.edit = function(contact) {
 
-    openNav();
+    openEditNav();
+    // $scope.contactEdit = contact;
+    // console.log("id from edit " + contactEdit);
+    // $scope.contactEdi= contactEdit;
+    console.log(contact);
+    $scope.contact = contact;
 
-    $scope.contactEdit = contact;
-    console.log($scope.contactEdit);
-    //
-    //
-    //  $http({
-    //    method: 'PUT',
-    //    url: '/contactlist/' + id })
-    //    .then(function(response){
-    //     console.log($scope.contact);
-    //     return $scope.contact
-    //
-    //   }), function(respone){
-    //     console.log("error");
-    //   }
+         $http({
+           method: 'PUT',
+             url: '/contactlist/' + id})
+           .then(function(response){
+            console.log($scope.contact);
+          }, function(response){
+            console.log("error");
+          });
+    };
+
+
+
+
+
+$scope.save = function (){
+    alert("save button");
+
+    $http.post('/contactlist', $scope.contact).then(function(data) {
+
+
+
+    });
+
 };
 
-$scope.saveNew = function(contact) {
-    openNav();
-    $scope.contactAdd = contact;
-    console.log($scope.contactAdd);
-
-}
 
 
 
 
 
 
-//  console.log("from edit ");
-//     $http.get('/contactlist/' + $scope.contact)
-//     .then(function callback(response){
-//      alert("callback function");
-//         $scope.contact = response.data;
-//         console.log($scope.contact);
-//      });
-// };
-
-$scope.saveContact = function(id) {
-console.log(id);
-$http.put('/contactlist/' + $scope.contact._id, $scope.contact);
-refresh();
-};
-
-});
+// Below is final bracketrs
+ });
