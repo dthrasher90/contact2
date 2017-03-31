@@ -3,11 +3,13 @@ var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
 var cors = require('cors');
-// mongoose.Promise = global.Promise;
+mongoose.Promise = global.Promise;
 
 
 var config = require('./config');
 var app = express();
+
+var id = new mongoose.Types.ObjectId;
 
 app.use(express.static(__dirname + "/public"));
 app.use(cors());
@@ -61,12 +63,9 @@ app.post('/contactlist/', function(req, res){
 
 app.delete('/contactlist/:id', function(req, res){
   var id = req.params.id;
-  // console.log("i recieved a delete request", id);
-  // db.contactlist.remove({ "_id" : ObjectId(id) }, function(err, data){
-  //   res.json(data);
-  // });
 
   Contact.remove({_id : id }, function(err, data){
+
     res.json(data);
   });
 
@@ -74,27 +73,20 @@ app.delete('/contactlist/:id', function(req, res){
 
 
 
-app.put('/contactlist/', function(req, res){
-    // var id = req.params.id;
-   console.log("from put request "  + id);
+app.put('/contactlist/:id', function(req, res){
+  var id = req.params.id;
+   console.log("from put request ", req.body);
 
-   Contact.findByIdAndUpdate(id, req.body, function(err, contact){
 
-     console.log("find by id= "+ contact);
-      if (err)  {
 
-        res.send(500);
+   Contact.findByIdAndUpdate({_id:req.params.id}, req.body).then(function (contact){
+     res.json(contact);
+     console.log("meeeeeoooooow" + contact);
+   });
 
-    } else {
 
-      Contact.save(function (err){
-        if (err) { console.log("dosument save error")}
-        else {res.json(contact)}
-      })
-      // res.json(contact);
-    }
-});
-});
+  });
+
 
 
 app.listen(config.port);

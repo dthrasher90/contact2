@@ -44,7 +44,7 @@ $http.get('/contactlist').then(function(response) {
 
 
 $scope.delete = function(id) {
-    alert("delete button");
+
     console.log(id);
     $http({
         method: 'DELETE',
@@ -66,39 +66,36 @@ $scope.addContact = function(contact) {
     console.log("inside add contact" + contact);
 };
 
+
+$scope.contact = {}
+
 $scope.edit = function(contact) {
 
-    openEditNav();
+  openEditNav();
     // $scope.contactEdit = contact;
     // console.log("id from edit " + contactEdit);
     // $scope.contactEdi= contactEdit;
     console.log(contact);
     $scope.contact = contact;
+};
 
+
+
+$scope.save = function (contact, id){
+var id = contact._id;
+console.log("test save "  + id);
+  // $scope.contact = contact;
          $http({
            method: 'PUT',
-             url: '/contactlist/' + id})
+           url: '/contactlist/' + id})
            .then(function(response){
-            console.log($scope.contact);
+            console.log("controller put request " + $scope.contact);
           }, function(response){
             console.log("error");
           });
+
+      closeEditNav();
     };
-
-
-
-
-
-$scope.save = function (){
-    alert("save button");
-
-    $http.post('/contactlist', $scope.contact).then(function(data) {
-
-
-
-    });
-
-};
 
 
 
