@@ -29,6 +29,8 @@
 
 
 <div id="main">
+
+<!--- =========================ANGULAR TABLE ============================================  -->
     <div class="container-fluid">
         <div class="row">
             <div class="col.xs.10">
@@ -39,7 +41,7 @@
                             <th> Last Name </th>
                             <th> Email </th>
                             <th> Phone </th>
-                            <th> Social Media</th>
+
                         </tr>
                     </thead>
                 </div>
@@ -64,7 +66,7 @@
                         <td> {{contact.socialmedia}} </td>
 
 
-                          <td>
+                        <td>
                             <button type="button" class="btn btn-default btn-sm editbtn" ng-click= "edit(contact, contact._id)">
                             <span class="glyphicon glyphicon-pencil"></span>
                             </button> </td>
@@ -72,8 +74,6 @@
                         <td><button type="button" class="btn btn-default btn-sm delete" ng-click="delete(contact._id)">
                             <span class="glyphicon glyphicon-trash"></span>
                             </button> </td>
-
-
                         </tr>
 
 
@@ -101,7 +101,7 @@
                     <input class="form-control" ng-model="contact.lastname" placeholder="last name">
                     <input class="form-control" ng-model="contact.email" placeholder="email">
                     <input class="form-control" ng-model="contact.phone" placeholder="phone number">
-                    <div> {{contact}} </div>
+                    
 
                     <button type="button" ng-click="save(contact, contact._id)" class="btn btn-warning">Save</button>
 
@@ -141,7 +141,7 @@
     }
 
     function openEditNav() {
-        document.getElementById("editNav").style.width = "700px";
+        document.getElementById("editNav").style.width = "200px";
         document.getElementById("main").style.marginLeft = "200px";
 
     }

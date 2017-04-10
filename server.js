@@ -1,7 +1,8 @@
 var express = require('express');
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
-var methodOverride = require('method-override');
+
+
 var cors = require('cors');
 mongoose.Promise = global.Promise;
 
@@ -16,7 +17,7 @@ app.use(cors());
 app.use(bodyParser.urlencoded({'extended':'true'}));            // parse application/x-www-form-urlencoded
 app.use(bodyParser.json());                                     // parse application/json
 app.use(bodyParser.json({ type: 'application/vnd.api+json' })); // parse application/vnd.api+json as json
-app.use(methodOverride());
+// app.use(methodOverride());
 
 var Contact = require('./contact');
 
@@ -24,6 +25,8 @@ mongoose.connect(config.db);
 mongoose.connection.on('connected', function () {
   console.log('Mongoose default connection open to ' + config.db);
 });
+
+
 
 app.get('/contactlist', function(req, res){
   console.log('inside contact get');
@@ -42,10 +45,7 @@ app.get('*', function(req, res) {
 });
 
 app.post('/contactlist/', function(req, res){
-  // console.log(req.body);
-  // db.contactlist.insert(req.body, function(err, data){
-  //  res.json(data);
-  // });
+
 
   var newContact = new Contact(req.body);
 		newContact.save(function(err, contact){
@@ -74,18 +74,18 @@ app.delete('/contactlist/:id', function(req, res){
 
 
 app.put('/contactlist/:id', function(req, res){
-  var id = req.params.id;
-   console.log("from put request ", req.body);
 
 
+   console.log("from put request " + req.body);
 
-   Contact.findByIdAndUpdate({_id:req.params.id}, req.body).then(function (contact){
-     res.json(contact);
-     console.log("meeeeeoooooow" + contact);
+   Contact.findByIdAndUpdate({_id: req.params.id}, req.body).then(function (contact){
+     res.send(contact);
+
+     closeEditNav();
+     refresh();
+
    });
-
-
-  });
+});
 
 
 
