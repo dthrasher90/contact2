@@ -1,13 +1,22 @@
 <!DOCTYPE html>
+<html lang="en">
 
 <head>
     <meta charset="utf-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>My Mean Stack application</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+   
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+
+
+    <script src="https://use.fontawesome.com/ffafbe8b8e.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Lora" rel="stylesheet">
     <link rel="stylesheet" type: "text/css" href="main.css">
+
     <meta charset="UTF-8">
     <base href="/">
     <script src=https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js></script>
@@ -17,7 +26,7 @@
 </head>
 
 <header class="jumbotron text-center">
-    <h2>Mean Stack ContactList App </h2>
+    <h2>Mean Stack Roll-a-Dex </h2>
     <h4>Feel free to use</h4>
 </header>
 
@@ -33,7 +42,7 @@
 <!--- =========================ANGULAR TABLE ============================================  -->
     <div class="container-fluid">
         <div class="row">
-            <div class="col.xs.10">
+     <!--        <div class="col.xs.10">
                 <table class="table table-hover">
                     <thead>
                         <tr>
@@ -45,12 +54,12 @@
                         </tr>
                     </thead>
                 </div>
-            </div>
+            </div> -->
 
 
 
 
-        <div class="row">
+      <!--   <div class="row">
             <div class="col-xs-2">
 
                 <tbody>
@@ -79,6 +88,27 @@
 
                     </tbody>
                 </table>
+ -->
+<div class="container">
+ <div class="row">
+    <div ng-repeat= "contact in contacts" class="card clearfix" style="width: 20rem;">
+    <img class="card-img-top" src="maleimage.jpg" style= "height: 75px; width: 75px;">
+
+        <h4 class="card-title">{{contact.lastname}}, {{contact.firstname}}</h4>
+         <div class="card-block">
+<!--     <h4 class="card-title">{{contact.lastname}}, {{contact.firstname}}</h4>
+ -->    
+             <p class="card-text">
+                Phone:  {{contact.phone}} </br>
+                Email:  {{contact.email}} </p> </br>
+             </p>
+    <a href="#" class="btn btn-primary btn-sm">Company Webiste</a>
+    <i class="fa fa-trash fa-1x" ng-click="delete(contact._id)" ></i>
+    <i class="fa fa-pencil-square-o fa-1x" onclick="openEditNav(contact._id)" aria-hidden="true"></i>
+
+    </div>
+  </div>
+</div>
   <!--====================================== NAV BARS=========================================================== -->
                 <div id="addNav" class="sidenav">
                     <h6>New Contact Form: </h6>
@@ -94,18 +124,18 @@
                 </div>
 
 
-                <div id="editNav" class="sidenav" >
+   <!--              <div id="editNav" class="sidenav" >
                     <h6>Edit Contact</h6>
                     <a href="javascript:void(0)" class="closebtn" onclick="closeEditNav()">&times;</a>
                     <input class="form-control" ng-model="contact.firstname" placeholder="first name">
                     <input class="form-control" ng-model="contact.lastname" placeholder="last name">
                     <input class="form-control" ng-model="contact.email" placeholder="email">
                     <input class="form-control" ng-model="contact.phone" placeholder="phone number">
-                    
+
 
                     <button type="button" ng-click="save(contact, contact._id)" class="btn btn-warning">Save</button>
 
-                </div>
+                </div> -->
 
 
 

@@ -74,17 +74,21 @@ app.delete('/contactlist/:id', function(req, res){
 
 
 app.put('/contactlist/:id', function(req, res){
-
+//var id = req.params.id;
 
    console.log("from put request " + req.body);
 
    Contact.findByIdAndUpdate({_id: req.params.id}, req.body).then(function (contact){
+
+
+     console.log("meeeeeoooooow"+ req.body);
      res.send(contact);
 
      closeEditNav();
      refresh();
 
    });
+
 });
 
 

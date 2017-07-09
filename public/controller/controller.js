@@ -83,5 +83,5 @@ $scope.save = function (contact, id){
 
 
 
-// Below is final bracketrs
+// Below is final brackets
  });
