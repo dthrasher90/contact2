@@ -3,20 +3,15 @@
 
 <head>
     <meta charset="utf-8">
-     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>My Mean Stack application</title>
-   
-
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-        <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
-
-
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
     <script src="https://use.fontawesome.com/ffafbe8b8e.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Lora" rel="stylesheet">
     <link rel="stylesheet" type: "text/css" href="main.css">
-
     <meta charset="UTF-8">
     <base href="/">
     <script src=https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js></script>
@@ -24,161 +19,80 @@
     <script src="controller/controller.js">
     </script>
 </head>
-
-<header class="jumbotron text-center">
+<header class="header">
     <h2>Mean Stack Roll-a-Dex </h2>
     <h4>Feel free to use</h4>
 </header>
 
 <body ng-app="contactlistApp" ng-controller="MainCtrl">
-
-
     <button class="btn btn-warning addbtn" onclick="openAddNav()">Create New Contact </button>
-    <p>Search:  <input type="test" ng-model="searchContact"></p>
+    <p>Search:
+        <input type="test" ng-model="searchContact">
+    </p>
+    <div id="main">
+        <div class="container">
+            <div class="row">
+                
+                        <div ng-repeat="contact in contacts" class="card clearfix" style="width: 20rem;">
+                       
+                           
+                            <div class="card-block">
+                                 <h4 class="card-title">{{contact.lastname}}, {{contact.firstname}}</h4>
+                                <p class="card-text">
+                                    Phone: {{contact.phone}} </br>
+                                    Email: {{contact.email}} </p>
+                                </br>
+                                </p>
+                                </br>
+                                <div class="links" >
+                                <i class="fa fa-trash fa-1x" ng-click="delete(contact._id)"></i>
+                                <i class="fa fa-pencil-square-o fa-1x" onclick="openEditNav(contact._id)" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
 
-<div id="main">
-
-<!--- =========================ANGULAR TABLE ============================================  -->
-    <div class="container-fluid">
-        <div class="row">
-     <!--        <div class="col.xs.10">
-                <table class="table table-hover">
-                    <thead>
-                        <tr>
-                            <th> First Name </th>
-                            <th> Last Name </th>
-                            <th> Email </th>
-                            <th> Phone </th>
-
-                        </tr>
-                    </thead>
-                </div>
-            </div> -->
-
-
-
-
-      <!--   <div class="row">
-            <div class="col-xs-2">
-
-                <tbody>
-
-
-                    <tr ng-repeat="contact in contacts | filter:searchContact" >
-
-
-                        <td> {{contact.firstname}} </td>
-                        <td> {{contact.lastname}} </td>
-                        <td> {{contact.email}} </td>
-                        <td> {{contact.phone}} </td>
-                        <td> {{contact.socialmedia}} </td>
-
-
-                        <td>
-                            <button type="button" class="btn btn-default btn-sm editbtn" ng-click= "edit(contact, contact._id)">
-                            <span class="glyphicon glyphicon-pencil"></span>
-                            </button> </td>
-
-                        <td><button type="button" class="btn btn-default btn-sm delete" ng-click="delete(contact._id)">
-                            <span class="glyphicon glyphicon-trash"></span>
-                            </button> </td>
-                        </tr>
-
-
-                    </tbody>
-                </table>
- -->
-<div class="container">
- <div class="row">
-    <div ng-repeat= "contact in contacts" class="card clearfix" style="width: 20rem;">
-    <img class="card-img-top" src="maleimage.jpg" style= "height: 75px; width: 75px;">
-
-        <h4 class="card-title">{{contact.lastname}}, {{contact.firstname}}</h4>
-         <div class="card-block">
-<!--     <h4 class="card-title">{{contact.lastname}}, {{contact.firstname}}</h4>
- -->    
-             <p class="card-text">
-                Phone:  {{contact.phone}} </br>
-                Email:  {{contact.email}} </p> </br>
-             </p>
-    <a href="#" class="btn btn-primary btn-sm">Company Webiste</a>
-    <i class="fa fa-trash fa-1x" ng-click="delete(contact._id)" ></i>
-    <i class="fa fa-pencil-square-o fa-1x" onclick="openEditNav(contact._id)" aria-hidden="true"></i>
-
-    </div>
-  </div>
-</div>
-  <!--====================================== NAV BARS=========================================================== -->
-                <div id="addNav" class="sidenav">
-                    <h6>New Contact Form: </h6>
-                    <a href="javascript:void(0)" class="closebtn" onclick="closeAddNav()">&times;</a>
-                    <input class="form-control" ng-model="contactAdd.firstname" placeholder="first name">
-                    <input class="form-control" ng-model="contactAdd.lastname" placeholder="last name">
-                    <input class="form-control" ng-model="contactAdd.email" placeholder="email">
-                    <input class="form-control" ng-model="contactAdd.phone" placeholder="phone number">
-
-
-                    <button type="button" ng-click="addContact(contactAdd)" class="btn btn-warning">Save</button>
-
-                </div>
-
-
-   <!--              <div id="editNav" class="sidenav" >
-                    <h6>Edit Contact</h6>
-                    <a href="javascript:void(0)" class="closebtn" onclick="closeEditNav()">&times;</a>
-                    <input class="form-control" ng-model="contact.firstname" placeholder="first name">
-                    <input class="form-control" ng-model="contact.lastname" placeholder="last name">
-                    <input class="form-control" ng-model="contact.email" placeholder="email">
-                    <input class="form-control" ng-model="contact.phone" placeholder="phone number">
-
-
-                    <button type="button" ng-click="save(contact, contact._id)" class="btn btn-warning">Save</button>
-
-                </div> -->
-
-
-
-            </div>
+                    <!--======================================INPUT=========================================================== -->
+                    <div id="addNav" class="sidenav">
+                        <h6>New Contact Form: </h6>
+                        <a href="javascript:void(0)" class="closebtn" onclick="closeAddNav()">&times;</a>
+                        <input class="form-control" ng-model="contactAdd.firstname" placeholder="first name">
+                        <input class="form-control" ng-model="contactAdd.lastname" placeholder="last name">
+                        <input class="form-control" ng-model="contactAdd.email" placeholder="email">
+                        <input class="form-control" ng-model="contactAdd.phone" placeholder="phone number">
+                        
+                        <button type="button" ng-click="addContact(contactAdd)" class="btn btn-warning">Save</button>
+                    </div>
+             
         </div>
     </div>
-</div>
+
 </body>
-
-
 <!-- ==================================================Java Script================================================ -->
-
-
-
-
-
-
-
 <script type="text/javascript">
+/* Set the width of the side navigation to 250px */
+function openAddNav() {
+    document.getElementById("addNav").style.width = "200px";
+    document.getElementById("main").style.marginLeft = "200px";
 
+}
 
-    /* Set the width of the side navigation to 250px */
-    function openAddNav() {
-        document.getElementById("addNav").style.width = "200px";
-        document.getElementById("main").style.marginLeft = "200px";
+/* Set the width of the side navigation to 0 */
+function closeAddNav() {
+    document.getElementById("addNav").style.width = "0";
+    document.getElementById("main").style.marginLeft = "0";
+}
 
-    }
+function openEditNav() {
+    document.getElementById("editNav").style.width = "200px";
+    document.getElementById("main").style.marginLeft = "200px";
 
-    /* Set the width of the side navigation to 0 */
-    function closeAddNav() {
-        document.getElementById("addNav").style.width = "0";
-        document.getElementById("main").style.marginLeft = "0";
-    }
+}
 
-    function openEditNav() {
-        document.getElementById("editNav").style.width = "200px";
-        document.getElementById("main").style.marginLeft = "200px";
-
-    }
-
-    /* Set the width of the side navigation to 0 */
-    function closeEditNav() {
-        document.getElementById("editNav").style.width = "0";
-        document.getElementById("main").style.marginLeft = "0";
-    }
+/* Set the width of the side navigation to 0 */
+function closeEditNav() {
+    document.getElementById("editNav").style.width = "0";
+    document.getElementById("main").style.marginLeft = "0";
+}
 </script>

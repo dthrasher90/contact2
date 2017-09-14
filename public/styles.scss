@@ -10,7 +10,7 @@ body{
   background-color: ghostwhite;
 }
 
-.jumbotron{
+.header{
   background-color: darkslategrey;
   color: ghostwhite;
 }
@@ -19,6 +19,7 @@ p{
   clear: both;
   overflow: hidden;
   padding-right: 10px;
+  
 
 }
 
@@ -78,18 +79,31 @@ p{
 }
 
 .card{
-  font-size: 18px;
+  position: relative;
+  font-size: 14px;
   font-family: lora;
-  box-shadow: 10px 10px 5px 2px dimgrey;
+  box-shadow: 2px 2px 5px 2px dimgrey;
   padding: 5px;
   margin-bottom: 5px;
   margin-right: 5px;
-  display: block;
- 
-  p {
+  display: flex;
+  flex-flow: column;
+  width: 220px !important;
+  height: 170px !important;
 
-    float: left;
+  p {
+    position: absolute;
+    margin-left: 0px;
+    flex: 1 1 0;
+    overflow: hidden;
   }
+
+  .links{
+    flex: 1 1 0;
+    padding-top: 20px;
+  }
+ 
+
 
 }
 /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
